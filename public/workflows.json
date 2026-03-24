@@ -1,0 +1,672 @@
+{
+  "workflows": [
+    {
+      "id": "software-project",
+      "name": "مشروع برمجي",
+      "icon": "💻",
+      "description": "دليل شامل لتطوير المشاريع البرمجية من الفكرة للإطلاق — يشمل التخطيط، التصميم، التطوير، الاختبار، والنشر.",
+      "color": "#6366f1",
+      "stats": { "phases": 11, "steps": 33, "tools": 7 },
+      "phases": [
+        {
+          "num": 1, "color": "#6366f1",
+          "title": "تعريف المشروع والـ Vision",
+          "subtitle": "الأساس اللي كل شيء بيبنى عليه",
+          "tool": "📝 Linear",
+          "steps": [
+            {
+              "title": "كتابة جملة الـ Vision",
+              "desc": "اكتب جملة واحدة تصف المشروع بوضوح: ماذا يحل، لمن، وكيف يختلف عن غيره.",
+              "tools": ["📝 Linear — Project Doc"],
+              "outputs": ["Vision Statement موثّق"],
+              "tip": "استخدم هذا الشكل: 'تطبيق X يساعد Y على Z بدون W' — أي خطة تتعارض مع هذه الجملة تُرفض تلقائياً."
+            },
+            {
+              "title": "تحديد نطاق الـ MVP",
+              "desc": "قرر بالضبط وش داخل الـ MVP وش خارجه. ارسم خطاً واضحاً بين 'الآن' و'لاحقاً'.",
+              "tools": ["📝 Linear — Milestone"],
+              "outputs": ["قائمة features الـ MVP الأساسية", "قائمة features مؤجّلة"],
+              "tip": "خطأ شائع: تضيف features 'لأنها سهلة' — الـ MVP يجب أن يحل المشكلة الأساسية فقط."
+            },
+            {
+              "title": "تحديد المستخدمين والـ Personas",
+              "desc": "صف شخصيتين أو ثلاث من المستخدمين المحتملين: عمرهم، تحدياتهم، كيف يستخدمون التطبيق.",
+              "tools": ["📝 Linear — Doc"],
+              "outputs": ["2-3 User Personas موثّقة"],
+              "tip": "لا تكتب personas خيالية — تكلم مع أشخاص حقيقيين، حتى لو 5 أشخاص."
+            }
+          ]
+        },
+        {
+          "num": 2, "color": "#0ea5e9",
+          "title": "تحليل المتطلبات وكتابة الـ User Stories",
+          "subtitle": "ترجمة الفكرة لمهام قابلة للتنفيذ",
+          "tool": "🔷 Linear",
+          "steps": [
+            {
+              "title": "كتابة الـ User Stories",
+              "desc": "لكل feature اكتب: 'كـ [نوع المستخدم]، أريد أن [أفعل X]، حتى أستطيع [تحقيق Y]'.",
+              "tools": ["🔷 Linear — Issues"],
+              "outputs": ["مجموعة User Stories كـ Issues في Linear"],
+              "tip": "كل Story يجب أن تكون قابلة للاختبار — إذا ما قدرت تكتب test لها، هي غامضة."
+            },
+            {
+              "title": "التصنيف والأولويات",
+              "desc": "صنّف كل Issue: Priority (Urgent/High/Medium/Low) ولصّق Labels (must-have, nice-to-have, backlog).",
+              "tools": ["🔷 Linear — Labels & Priority"],
+              "outputs": ["Backlog منظّم ومصنّف"],
+              "tip": "استخدم MoSCoW method: Must / Should / Could / Won't — وكن صريحاً مع نفسك."
+            },
+            {
+              "title": "تقدير الجهد",
+              "desc": "قدّر كل Issue بـ Story Points أو T-shirt sizes (XS, S, M, L, XL). لا تقدّر بالساعات في البداية.",
+              "tools": ["🔷 Linear — Estimates"],
+              "outputs": ["Issues مع تقديرات واقعية"],
+              "tip": "ضاعف تقديراتك الأولى دائماً — المطورون يقدّرون بتفاؤل مزمن."
+            }
+          ]
+        },
+        {
+          "num": 3, "color": "#10b981",
+          "title": "تصميم قاعدة البيانات",
+          "subtitle": "بناء الهيكل الأساسي للبيانات",
+          "tool": "🗄️ ChartDB",
+          "steps": [
+            {
+              "title": "تحديد الـ Entities",
+              "desc": "اكتب كل الكيانات الأساسية (User, Invoice, Category...). ابدأ بورقة أو whiteboard قبل الأداة.",
+              "tools": ["🗄️ ChartDB — Diagram"],
+              "outputs": ["قائمة Entities مع attributes"],
+              "tip": "قاعدة: إذا كان الكيان يحتاج أكثر من 3 attributes — هو يستحق table مستقلة."
+            },
+            {
+              "title": "رسم العلاقات (ERD)",
+              "desc": "في ChartDB ارسم العلاقات: one-to-one, one-to-many, many-to-many. حدد Foreign Keys والـ Indexes.",
+              "tools": ["🗄️ ChartDB — ERD"],
+              "outputs": ["ERD كامل وواضح"],
+              "tip": "لا تضع JSON columns في PostgreSQL إلا لبيانات لن تبحث فيها أبداً — الـ query performance سيكون سيئاً."
+            },
+            {
+              "title": "كتابة الـ Migration Scripts",
+              "desc": "حوّل الـ ERD لـ SQL migration scripts. استخدم naming convention ثابتة: snake_case للأعمدة.",
+              "tools": ["🗄️ ChartDB — SQL Export", "📁 Supabase — Migrations"],
+              "outputs": ["Migration files جاهزة للتنفيذ"],
+              "tip": "اعتبر كل migration كـ commit — لا ترجع وتعدّل migration قديمة، اكتب migration جديدة."
+            }
+          ]
+        },
+        {
+          "num": 4, "color": "#8b5cf6",
+          "title": "تصميم المعمارية",
+          "subtitle": "رسم هيكل النظام وتدفق البيانات",
+          "tool": "✏️ Eraser.io",
+          "steps": [
+            {
+              "title": "رسم High-Level Architecture",
+              "desc": "في Eraser.io ارسم المكونات الكبيرة: Mobile App → API → DB → Third-party Services. اكتبها كـ code-diagram.",
+              "tools": ["✏️ Eraser.io — Architecture Diagram"],
+              "outputs": ["System Architecture Diagram"],
+              "tip": "ابدأ بـ Excalidraw للـ brainstorm السريع (أسرع من التفكير)، ثم انقل للـ Eraser.io للنسخة النهائية."
+            },
+            {
+              "title": "تصميم الـ API Endpoints",
+              "desc": "اكتب كل endpoint: Method، URL، Request Body، Response. مثال: POST /api/invoices",
+              "tools": ["✏️ Eraser.io — Sequence Diagram"],
+              "outputs": ["API Contract موثّق (مثل Swagger بدون code)"],
+              "tip": "صمّم الـ API قبل ما تكتب سطر كود — الباك إند والفرونت إند يتوافقان على الـ contract أولاً."
+            },
+            {
+              "title": "تصميم Authentication Flow",
+              "desc": "ارسم Sequence Diagram لتدفق تسجيل الدخول: من المستخدم → Supabase Auth → JWT → API.",
+              "tools": ["✏️ Eraser.io — Sequence Diagram", "🔐 Supabase Auth"],
+              "outputs": ["Auth Flow Diagram واضح"],
+              "tip": "لا تبني auth من الصفر — Supabase Auth يوفر 80% من المشاكل الأمنية جاهزة."
+            }
+          ]
+        },
+        {
+          "num": 5, "color": "#f59e0b",
+          "title": "تحديد الـ Tech Stack والبيئات",
+          "subtitle": "اختيار الأدوات والبيئات بشكل نهائي",
+          "tool": "📋 Linear",
+          "steps": [
+            {
+              "title": "توثيق الـ Tech Stack",
+              "desc": "وثّق القرار النهائي: React Native + Expo / Node.js + Express / PostgreSQL / Supabase / Railway مع سبب اختيار كل تقنية.",
+              "tools": ["📋 Linear — Doc", "✏️ Eraser.io"],
+              "outputs": ["Tech Stack Doc موثّق ومبرر"],
+              "tip": "وثّق الـ alternatives اللي رفضتها ولماذا — يوفّر نقاشات مستقبلية بلا نهاية."
+            },
+            {
+              "title": "إعداد البيئات الثلاث",
+              "desc": "حدد الفرق بين: Development (محلي) / Staging (اختبار) / Production (الإنتاج). كل بيئة لها .env منفصل.",
+              "tools": ["🚀 Railway — Environments", "📁 Supabase — Projects"],
+              "outputs": ["تعريف واضح للبيئات الثلاث"],
+              "tip": "لا تشارك أبداً API keys بين بيئات مختلفة — حتى لو بدا أسهل."
+            },
+            {
+              "title": "وضع معايير جودة الكود",
+              "desc": "حدد: لغة البرمجة (TypeScript مفضّل)، ESLint rules، Prettier config، commit message format.",
+              "tools": ["📁 GitHub — Repo Config"],
+              "outputs": ["CONTRIBUTING.md + Linting config"],
+              "tip": "ضع هذه المعايير في اليوم الأول — تغييرها لاحقاً يعني refactor ضخم."
+            }
+          ]
+        },
+        {
+          "num": 6, "color": "#ec4899",
+          "title": "تصميم الواجهة في Figma",
+          "subtitle": "تحويل المتطلبات لتصميم قابل للتطوير",
+          "tool": "🎨 Figma",
+          "steps": [
+            {
+              "title": "بناء Design System",
+              "desc": "ابدأ بـ Components قبل الشاشات: Colors، Typography، Buttons، Cards، Inputs. اعملها كـ Figma Components.",
+              "tools": ["🎨 Figma — Components"],
+              "outputs": ["Design System / UI Kit متكامل"],
+              "tip": "اسمِّ components بنفس الاسم اللي ستستخدمه في الكود — يسهّل التواصل بين المصمم والمطور."
+            },
+            {
+              "title": "رسم Wireframes للشاشات",
+              "desc": "ارسم Wireframes رمادية (Lo-Fi) لكل شاشة رئيسية بدون ألوان. ركّز على الـ layout والـ flow.",
+              "tools": ["🎨 Figma — Wireframes"],
+              "outputs": ["Wireframes لكل شاشة رئيسية"],
+              "tip": "لا تضيع وقتاً في الألوان في هذه المرحلة — الـ layout هو اللي يحتاج موافقة أولاً."
+            },
+            {
+              "title": "تحويل لـ Hi-Fi Design وربط الـ Prototype",
+              "desc": "أضف الألوان والتفاصيل، ثم اربط الشاشات بـ Prototype لتشوف الـ user flow كاملاً.",
+              "tools": ["🎨 Figma — Prototype"],
+              "outputs": ["Clickable Prototype جاهز للاختبار"],
+              "tip": "اختبر الـ Prototype مع 3 أشخاص حقيقيين قبل ما تبدأ الكود — التغيير في Figma مجاني، في الكود مكلف."
+            }
+          ]
+        },
+        {
+          "num": 7, "color": "#14b8a6",
+          "title": "إعداد بيئة التطوير والـ Repo",
+          "subtitle": "البنية التحتية للمشروع",
+          "tool": "📁 GitHub",
+          "steps": [
+            {
+              "title": "إنشاء الـ Repo وهيكل المشروع",
+              "desc": "أنشئ monorepo أو repos منفصلة. ضع README.md، .gitignore، .env.example من أول يوم.",
+              "tools": ["📁 GitHub"],
+              "outputs": ["Repo منظّم مع README كامل"],
+              "tip": "الـ .env.example يجب أن يحوي كل المتغيرات بدون قيم — من يستنسخ المشروع يعرف ماذا يحتاج."
+            },
+            {
+              "title": "إعداد Branching Strategy",
+              "desc": "اعتمد Git Flow: main (إنتاج) / develop (تطوير) / feature/xxx / fix/xxx / release/xxx.",
+              "tools": ["📁 GitHub — Branch Protection"],
+              "outputs": ["Branch rules محددة ومحمية"],
+              "tip": "فعّل Branch Protection على main — لا أحد يـ push مباشرة حتى أنت."
+            },
+            {
+              "title": "إعداد CI/CD الأساسي",
+              "desc": "اضبط GitHub Actions: عند كل PR يشتغل Lint + Tests تلقائياً. عند merge لـ main يبدأ الـ Deploy.",
+              "tools": ["📁 GitHub Actions", "🚀 Railway — Auto Deploy"],
+              "outputs": ["Pipeline CI/CD يعمل تلقائياً"],
+              "tip": "CI/CD من اليوم الأول — مو لاحقاً. إعداده لاحقاً يعني technical debt فوري."
+            }
+          ]
+        },
+        {
+          "num": 8, "color": "#3b82f6",
+          "title": "التطوير بنظام Sprints",
+          "subtitle": "بناء المشروع بخطوات منظّمة",
+          "tool": "🔷 Linear",
+          "steps": [
+            {
+              "title": "تخطيط أول Sprint",
+              "desc": "في Linear أنشئ Sprint مدته أسبوعين. أضف Issues من الـ Backlog واعطِ كل Issue لـ assignee.",
+              "tools": ["🔷 Linear — Sprints"],
+              "outputs": ["Sprint Plan بمهام واضحة وأصحاب"],
+              "tip": "لا تملأ الـ Sprint بـ 100% الطاقة — خلّ 20% buffer للمشاكل غير المتوقعة (ودائماً توجد)."
+            },
+            {
+              "title": "Daily Standup روتين",
+              "desc": "كل يوم: ماذا أنجزت أمس؟ ماذا سأفعل اليوم؟ هل هناك blockers؟ سجّل الـ blockers كـ Issues.",
+              "tools": ["🔷 Linear — Updates"],
+              "outputs": ["تحديث يومي + blockers محددة"],
+              "tip": "لا تخفي الـ blockers — مشاركتها مبكراً توفر أياماً من الإهدار."
+            },
+            {
+              "title": "Code Review وإغلاق الـ Sprint",
+              "desc": "كل PR يمر بـ Code Review قبل الـ merge. في نهاية كل Sprint راجع ما أُنجز وما تأخر وسببه.",
+              "tools": ["📁 GitHub — Pull Requests", "🔷 Linear — Sprint Review"],
+              "outputs": ["Sprint Review Report + Lessons Learned"],
+              "tip": "Code Review ليس شخصياً — الكود يُراجع، لا الشخص."
+            }
+          ]
+        },
+        {
+          "num": 9, "color": "#ef4444",
+          "title": "الاختبار والـ QA",
+          "subtitle": "ضمان جودة المنتج قبل الإطلاق",
+          "tool": "🧪 Testing",
+          "steps": [
+            {
+              "title": "Unit Tests للـ Business Logic",
+              "desc": "اكتب tests للـ functions المهمة: حساب المبالغ، التحقق من الـ input، منطق الـ notifications.",
+              "tools": ["🧪 Jest — Unit Tests"],
+              "outputs": ["Test coverage لأهم الـ functions"],
+              "tip": "لا تهدف 100% coverage — ركّز على الـ business logic الحساسة والـ edge cases."
+            },
+            {
+              "title": "Integration Tests للـ API",
+              "desc": "اختبر كل API endpoint: الـ success cases والـ error cases والـ edge cases (empty data, wrong types...).",
+              "tools": ["🧪 Supertest + Jest"],
+              "outputs": ["Test suite كاملة للـ API"],
+              "tip": "اختبر الـ unhappy paths أكثر من الـ happy paths — هناك حيث الأخطاء تظهر."
+            },
+            {
+              "title": "Manual QA و UAT",
+              "desc": "اعمل جلسة QA يدوية على بيئة الـ Staging. ثم اجمع 3-5 مستخدمين حقيقيين لـ User Acceptance Testing.",
+              "tools": ["📱 Expo Go — Staging Build", "🔷 Linear — Bug Reports"],
+              "outputs": ["قائمة Bugs مصنّفة + موافقة المستخدمين"],
+              "tip": "ابحث عن مستخدمين لا يعرفون التطبيق — هم يجدون ما لا تراه أنت أبداً."
+            }
+          ]
+        },
+        {
+          "num": 10, "color": "#a855f7",
+          "title": "الـ Deployment على Railway",
+          "subtitle": "إطلاق المشروع للعالم",
+          "tool": "🚀 Railway + Supabase",
+          "steps": [
+            {
+              "title": "إعداد بيئة Production في Railway",
+              "desc": "أنشئ Project جديد في Railway، ضبط Environment Variables، اربط الـ GitHub Repo للـ Auto Deploy.",
+              "tools": ["🚀 Railway — Production", "📁 Supabase — Production DB"],
+              "outputs": ["Backend يعمل على Production URL"],
+              "tip": "تأكد أن كل Environment Variable موجودة في Railway قبل أول deploy — خطأ مفقود يوقف كل شيء."
+            },
+            {
+              "title": "تشغيل Database Migrations",
+              "desc": "شغّل Migration scripts على production DB. تأكد من Backup قبل أي migration مهمة.",
+              "tools": ["📁 Supabase — SQL Editor", "🗄️ Database Migrations"],
+              "outputs": ["Database جاهزة على Production"],
+              "tip": "قاعدة ذهبية: backup قبل كل migration — حتى لو بدت بسيطة."
+            },
+            {
+              "title": "Build ونشر التطبيق",
+              "desc": "استخدم Expo EAS Build لبناء الـ APK/IPA. اختبر الـ production build على جهاز حقيقي قبل الرفع للـ Store.",
+              "tools": ["📱 Expo EAS Build", "📱 App Store / Play Store"],
+              "outputs": ["التطبيق منشور ومتاح للتحميل"],
+              "tip": "أول submission للـ App Store تأخذ 24-48 ساعة مراجعة — خطط لذلك في جدولك."
+            }
+          ]
+        },
+        {
+          "num": 11, "color": "#22c55e",
+          "title": "المتابعة بعد الإطلاق",
+          "subtitle": "التحسين المستمر بعد اليوم الأول",
+          "tool": "📊 Analytics + Linear",
+          "steps": [
+            {
+              "title": "إعداد Monitoring والـ Alerts",
+              "desc": "راقب: Server uptime، API response times، Error rates، Crash reports. اضبط alerts على Railway.",
+              "tools": ["🚀 Railway — Metrics", "📊 Sentry — Error Tracking"],
+              "outputs": ["Dashboard مراقبة + Alerts تلقائية"],
+              "tip": "يجب أن تعرف عن أي خطأ قبل المستخدم — مو بعد ما يشتكي."
+            },
+            {
+              "title": "جمع Feedback وتحليل البيانات",
+              "desc": "اجمع تقييمات المستخدمين، راجع أكثر الشاشات استخداماً وأكثرها خروجاً. حوّل الـ feedback لـ Issues في Linear.",
+              "tools": ["🔷 Linear — Feedback Issues", "📊 Analytics"],
+              "outputs": ["Prioritized backlog للـ iteration القادمة"],
+              "tip": "الـ data تكذب أحياناً — جمع الـ qualitative feedback (مقابلات حقيقية) لا يقل أهمية."
+            },
+            {
+              "title": "تخطيط الـ Version القادمة",
+              "desc": "بعد الإطلاق بأسبوعين: راجع ما وعدت به، ما أنجزته، ماذا تعلّمت. ابدأ دورة التخطيط من جديد.",
+              "tools": ["🔷 Linear — Roadmap"],
+              "outputs": ["Roadmap محدّث + V2 plan"],
+              "tip": "الإطلاق ليس النهاية — المنتجات الناجحة تتكرر بسرعة وتتعلم بسرعة أكبر."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "visual-identity",
+      "name": "هوية بصرية",
+      "icon": "🎨",
+      "description": "دليل شامل لبناء هوية بصرية متكاملة للعلامة التجارية — من البحث والاستراتيجية إلى التصميم والتطبيق والتسليم.",
+      "color": "#ec4899",
+      "stats": { "phases": 5, "steps": 15, "tools": 5 },
+      "phases": [
+        {
+          "num": 1, "color": "#6366f1",
+          "title": "البحث والاكتشاف",
+          "subtitle": "فهم العلامة التجارية وسوقها",
+          "tool": "📝 Notion",
+          "steps": [
+            {
+              "title": "تحليل العلامة التجارية",
+              "desc": "حدد رسالة العلامة التجارية، قيمها، شخصيتها، والجمهور المستهدف. اجمع كل المعلومات في مستند واحد.",
+              "tools": ["📝 Notion — Brand Brief"],
+              "outputs": ["Brand Brief Document"],
+              "tip": "اسأل العميل: 'لو كانت علامتك شخص، كيف يتكلم؟' — الجواب يحدد شخصية التصميم."
+            },
+            {
+              "title": "تحليل المنافسين",
+              "desc": "ادرس 5-10 منافسين: ألوانهم، خطوطهم، أسلوبهم البصري. حدد ما يميّزك عنهم.",
+              "tools": ["📝 Notion — Competitor Analysis"],
+              "outputs": ["جدول تحليل منافسين مع screenshots"],
+              "tip": "لا تقلّد المنافسين — تعلّم منهم ثم اختلف عنهم بوعي."
+            },
+            {
+              "title": "Moodboard وجمع الإلهام",
+              "desc": "اجمع صور، ألوان، خطوط، وأنماط تعكس الاتجاه البصري المطلوب في لوحة إلهام واحدة.",
+              "tools": ["🎨 Pinterest", "🎨 Figma — Moodboard"],
+              "outputs": ["Moodboard معتمد من العميل"],
+              "tip": "أعرض 2-3 اتجاهات مختلفة، ودع العميل يختار — أفضل من تخمين ذوقه."
+            }
+          ]
+        },
+        {
+          "num": 2, "color": "#0ea5e9",
+          "title": "الاستراتيجية البصرية",
+          "subtitle": "تحديد الاتجاه والعناصر الأساسية",
+          "tool": "🎨 Figma",
+          "steps": [
+            {
+              "title": "اختيار لوحة الألوان",
+              "desc": "حدد اللون الرئيسي، اللون الثانوي، ألوان الخلفيات والنصوص. تأكد من التباين الكافي (WCAG AA).",
+              "tools": ["🎨 Coolors.co", "🎨 Figma — Color Styles"],
+              "outputs": ["Color Palette مع أكواد HEX وRGB"],
+              "tip": "اختبر الألوان على خلفيات فاتحة وداكنة — لون جميل على الأبيض قد يكون كارثة على الأسود."
+            },
+            {
+              "title": "اختيار الخطوط (Typography)",
+              "desc": "اختر خطاً رئيسياً للعناوين وخطاً ثانوياً للنصوص. تأكد من دعم اللغة العربية إذا لزم الأمر.",
+              "tools": ["🎨 Google Fonts", "🎨 Figma — Text Styles"],
+              "outputs": ["Typography Scale (أحجام ووزنات محددة)"],
+              "tip": "لا تستخدم أكثر من خطين — التعدد يشتت ويضعف الهوية."
+            },
+            {
+              "title": "تحديد أسلوب التصوير والرسومات",
+              "desc": "هل ستستخدم صور فوتوغرافية؟ رسومات؟ أيقونات؟ حدد النمط وطبّقه بشكل موحّد.",
+              "tools": ["🎨 Figma — Illustrations Style"],
+              "outputs": ["دليل الأسلوب المرئي للصور والرسومات"],
+              "tip": "الاتساق أهم من الجمال — صورة 'عادية' بأسلوب موحّد أفضل من صور 'رائعة' بأساليب مختلفة."
+            }
+          ]
+        },
+        {
+          "num": 3, "color": "#10b981",
+          "title": "تصميم الشعار والعناصر",
+          "subtitle": "إنشاء العناصر البصرية الرئيسية",
+          "tool": "🎨 Illustrator + Figma",
+          "steps": [
+            {
+              "title": "تصميم الشعار (Logo)",
+              "desc": "صمم 3-5 خيارات للشعار. ابدأ بالأبيض والأسود ثم أضف الألوان. تأكد من وضوحه بأحجام صغيرة.",
+              "tools": ["🎨 Adobe Illustrator", "🎨 Figma"],
+              "outputs": ["3-5 خيارات شعار + الخيار النهائي"],
+              "tip": "الشعار الجيد يعمل بحجم 16x16 بكسل — إذا لم يكن واضحاً بهذا الحجم، بسّطه."
+            },
+            {
+              "title": "إنشاء نسخ الشعار المتعددة",
+              "desc": "صمم نسخ مختلفة: أفقي، عمودي، أيقونة فقط، أبيض على داكن، داكن على أبيض.",
+              "tools": ["🎨 Adobe Illustrator"],
+              "outputs": ["ملفات الشعار بجميع الصيغ (SVG, PNG, PDF)"],
+              "tip": "صدّر بـ SVG دائماً كملف أساسي — يتكيف مع أي حجم بدون فقدان الجودة."
+            },
+            {
+              "title": "تصميم العناصر المكمّلة",
+              "desc": "صمم الأيقونات، الأنماط (Patterns)، والعناصر الرسومية التي ستستخدم في المواد التسويقية.",
+              "tools": ["🎨 Figma — Components", "🎨 Illustrator"],
+              "outputs": ["مكتبة عناصر بصرية جاهزة"],
+              "tip": "اصنع العناصر كـ components قابلة لإعادة الاستخدام — توفّر وقتاً هائلاً لاحقاً."
+            }
+          ]
+        },
+        {
+          "num": 4, "color": "#f59e0b",
+          "title": "التطبيق على المواد",
+          "subtitle": "تحويل الهوية لتطبيقات عملية",
+          "tool": "🎨 Figma + InDesign",
+          "steps": [
+            {
+              "title": "تصميم بطاقات العمل والأوراق الرسمية",
+              "desc": "طبّق الهوية على: بطاقة عمل، ورق مراسلات، مغلف، فاتورة. تأكد من الاتساق.",
+              "tools": ["🎨 Figma", "🎨 Adobe InDesign"],
+              "outputs": ["تصاميم الأوراق الرسمية جاهزة للطباعة"],
+              "tip": "اطلب proof طباعي قبل طباعة كميات — الألوان على الشاشة تختلف عن الواقع."
+            },
+            {
+              "title": "تصميم قوالب السوشال ميديا",
+              "desc": "صمم قوالب لـ Instagram، Twitter، LinkedIn بأحجام مختلفة. استخدم الألوان والخطوط من الهوية.",
+              "tools": ["🎨 Figma — Social Templates"],
+              "outputs": ["قوالب سوشال ميديا قابلة للتعديل"],
+              "tip": "صمم template واحد متعدد الاستخدام أفضل من 10 تصاميم لا يمكن تعديلها."
+            },
+            {
+              "title": "تصميم واجهة الموقع / التطبيق",
+              "desc": "طبّق الهوية على واجهة الموقع أو التطبيق. تأكد من التوافق بين المطبوعات والرقمي.",
+              "tools": ["🎨 Figma — Web/App Design"],
+              "outputs": ["تصميم واجهات رقمية متوافقة مع الهوية"],
+              "tip": "اللون الذي يعمل على المطبوعات (CMYK) قد يبدو مختلفاً على الشاشة (RGB) — تحقق من الاتساق."
+            }
+          ]
+        },
+        {
+          "num": 5, "color": "#22c55e",
+          "title": "التسليم والتوثيق",
+          "subtitle": "تسليم ملفات الهوية مع دليل الاستخدام",
+          "tool": "📁 Drive + PDF",
+          "steps": [
+            {
+              "title": "إعداد Brand Guidelines",
+              "desc": "اكتب دليل الهوية البصرية: كيف تُستخدم الألوان، الخطوط، الشعار، المسافات. أضف أمثلة صحيحة وخاطئة.",
+              "tools": ["🎨 Figma — Brand Guide", "📁 Adobe InDesign"],
+              "outputs": ["Brand Guidelines PDF كامل"],
+              "tip": "أضف أمثلة 'لا تفعل' (Don'ts) — هي أهم من أمثلة 'افعل' لأنها تمنع التشويه."
+            },
+            {
+              "title": "تنظيم وتسليم الملفات",
+              "desc": "رتّب كل الملفات في مجلدات واضحة: Logo/, Colors/, Fonts/, Templates/, Guidelines/. سلّمها بصيغ متعددة.",
+              "tools": ["📁 Google Drive", "📁 Dropbox"],
+              "outputs": ["مجلد ملفات منظّم ومسلّم للعميل"],
+              "tip": "أضف ملف README.txt يشرح محتويات كل مجلد — العميل لن يتذكر بعد شهر."
+            },
+            {
+              "title": "جلسة تسليم وشرح",
+              "desc": "اعقد جلسة مع العميل لشرح الهوية وكيفية استخدامها. أجب على أسئلته وتأكد من فهمه.",
+              "tools": ["📹 Zoom / Google Meet"],
+              "outputs": ["تسجيل الجلسة + موافقة العميل النهائية"],
+              "tip": "سجّل جلسة التسليم — ستحتاجها لما تنسى أنت أو العميل ما تم الاتفاق عليه."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mobile-app",
+      "name": "تطبيق موبايل",
+      "icon": "📱",
+      "description": "دليل شامل لتطوير تطبيقات الموبايل — من تحليل المتطلبات وتصميم تجربة المستخدم إلى التطوير والنشر على المتاجر.",
+      "color": "#14b8a6",
+      "stats": { "phases": 6, "steps": 18, "tools": 6 },
+      "phases": [
+        {
+          "num": 1, "color": "#6366f1",
+          "title": "تحليل المتطلبات والتخطيط",
+          "subtitle": "فهم المشروع وتحديد النطاق",
+          "tool": "📝 Linear",
+          "steps": [
+            {
+              "title": "تعريف المشكلة والحل",
+              "desc": "حدد: ما المشكلة التي يحلها التطبيق؟ من المستخدمون؟ ما الفرق عن الحلول الموجودة؟",
+              "tools": ["📝 Linear — Project Doc"],
+              "outputs": ["Problem Statement + Solution Brief"],
+              "tip": "إذا لم تستطع شرح فكرة التطبيق في جملتين — الفكرة تحتاج تبسيط."
+            },
+            {
+              "title": "تحديد المنصات والتقنيات",
+              "desc": "قرر: iOS فقط؟ Android فقط؟ كلاهما؟ Native أم Cross-platform (React Native / Flutter)؟",
+              "tools": ["📝 Linear — Tech Decision"],
+              "outputs": ["قرار المنصة والتقنية مبرر"],
+              "tip": "إذا بدأت لوحدك، ابدأ بـ React Native / Expo — تطبيق واحد لمنصتين يوفّر 40% من الوقت."
+            },
+            {
+              "title": "كتابة الـ User Stories وترتيب الأولويات",
+              "desc": "اكتب كل ميزة كـ User Story: 'كمستخدم، أريد أن... حتى أستطيع...'. رتّب حسب الأولوية.",
+              "tools": ["🔷 Linear — Issues"],
+              "outputs": ["Backlog مرتّب بالأولويات"],
+              "tip": "ابدأ بأقل عدد ممكن من الشاشات — كل شاشة إضافية = وقت تطوير + صيانة + اختبار إضافي."
+            }
+          ]
+        },
+        {
+          "num": 2, "color": "#ec4899",
+          "title": "تصميم تجربة المستخدم (UX/UI)",
+          "subtitle": "تصميم الواجهات وتجربة الاستخدام",
+          "tool": "🎨 Figma",
+          "steps": [
+            {
+              "title": "رسم الـ User Flow",
+              "desc": "ارسم مسار المستخدم من فتح التطبيق لأول مرة حتى الوصول للهدف الرئيسي. حدد كل شاشة وكل قرار.",
+              "tools": ["🎨 Figma — FigJam", "✏️ Eraser.io"],
+              "outputs": ["User Flow Diagram كامل"],
+              "tip": "المستخدم يجب أن يصل لهدفه في 3 نقرات أو أقل — كل نقرة إضافية تفقدك مستخدمين."
+            },
+            {
+              "title": "تصميم Wireframes",
+              "desc": "ارسم wireframes لكل شاشة: الصفحة الرئيسية، التسجيل، الإعدادات، الشاشات الداخلية. ركّز على الـ layout.",
+              "tools": ["🎨 Figma — Wireframes"],
+              "outputs": ["Wireframes لكل الشاشات"],
+              "tip": "صمم Mobile-first — الشاشة الصغيرة تجبرك على تبسيط التصميم وهذا شيء جيد."
+            },
+            {
+              "title": "تصميم Hi-Fi وبناء Prototype",
+              "desc": "أضف الألوان والخطوط والأيقونات. اربط الشاشات في Prototype تفاعلي للاختبار.",
+              "tools": ["🎨 Figma — Prototype"],
+              "outputs": ["Clickable Prototype جاهز للاختبار"],
+              "tip": "اختبر الـ Prototype على هاتف حقيقي — الحجم على الشاشة الكبيرة خادع."
+            }
+          ]
+        },
+        {
+          "num": 3, "color": "#10b981",
+          "title": "إعداد المشروع والبنية التحتية",
+          "subtitle": "تهيئة بيئة التطوير والـ Backend",
+          "tool": "📁 GitHub + Supabase",
+          "steps": [
+            {
+              "title": "إعداد مشروع التطوير",
+              "desc": "أنشئ المشروع: npx create-expo-app أو flutter create. اضبط الهيكل: screens/, components/, services/, utils/.",
+              "tools": ["📁 GitHub", "📱 Expo CLI"],
+              "outputs": ["مشروع جاهز مع folder structure واضح"],
+              "tip": "ضع navigation structure من البداية — إعادة هيكلته لاحقاً مؤلم جداً."
+            },
+            {
+              "title": "إعداد الـ Backend والـ Database",
+              "desc": "اختر Backend: Supabase (BaaS) أو Express.js (custom). أنشئ الجداول والـ API endpoints الأساسية.",
+              "tools": ["📁 Supabase", "🗄️ ChartDB"],
+              "outputs": ["Backend يعمل + Database مهيّأة"],
+              "tip": "استخدم Supabase للمشاريع الصغيرة والمتوسطة — يوفّر Auth + Database + Storage + Realtime."
+            },
+            {
+              "title": "إعداد الـ Authentication",
+              "desc": "ضبط تسجيل الدخول: Email/Password أو Google أو Apple Sign-In. تأكد من secure token storage.",
+              "tools": ["🔐 Supabase Auth", "📱 Expo SecureStore"],
+              "outputs": ["Auth flow يعمل بالكامل"],
+              "tip": "خزّن الـ tokens في SecureStore (Expo) أو Keychain (iOS) — لا تستخدم AsyncStorage للمعلومات الحساسة."
+            }
+          ]
+        },
+        {
+          "num": 4, "color": "#3b82f6",
+          "title": "التطوير والـ Sprints",
+          "subtitle": "بناء التطبيق خطوة بخطوة",
+          "tool": "🔷 Linear + VS Code",
+          "steps": [
+            {
+              "title": "تطوير الشاشات الأساسية",
+              "desc": "ابنِ الشاشات حسب الأولوية: شاشة الدخول، الرئيسية، التفاصيل. استخدم components قابلة لإعادة الاستخدام.",
+              "tools": ["💻 VS Code", "📱 Expo Go"],
+              "outputs": ["الشاشات الأساسية تعمل"],
+              "tip": "اختبر كل شاشة على iOS و Android أثناء التطوير — لا تنتظر النهاية لاكتشاف اختلافات."
+            },
+            {
+              "title": "ربط الـ API والبيانات",
+              "desc": "اربط الشاشات بالـ Backend: جلب البيانات، الإنشاء، التحديث، الحذف. ضع loading states و error handling.",
+              "tools": ["📱 React Query / SWR", "📁 Supabase Client"],
+              "outputs": ["تطبيق متصل بالـ Backend بالكامل"],
+              "tip": "استخدم React Query للـ caching — يوفّر requests غير ضرورية ويسرّع التطبيق بشكل ملحوظ."
+            },
+            {
+              "title": "إضافة الميزات المتقدمة",
+              "desc": "أضف: Push Notifications، Offline support، Deep linking، حسب المتطلبات.",
+              "tools": ["📱 Expo Notifications", "📱 Expo Linking"],
+              "outputs": ["ميزات متقدمة تعمل ومختبرة"],
+              "tip": "الـ Push Notifications تحتاج setup مختلف لـ iOS و Android — ابدأ بالإعداد مبكراً."
+            }
+          ]
+        },
+        {
+          "num": 5, "color": "#ef4444",
+          "title": "الاختبار وضمان الجودة",
+          "subtitle": "اختبار التطبيق قبل النشر",
+          "tool": "🧪 Testing + TestFlight",
+          "steps": [
+            {
+              "title": "اختبار على أجهزة حقيقية",
+              "desc": "اختبر على 3-5 أجهزة مختلفة (أحجام شاشات، إصدارات OS مختلفة). سجّل أي bugs.",
+              "tools": ["📱 Expo Go", "📱 TestFlight"],
+              "outputs": ["قائمة bugs مصنّفة بالأولوية"],
+              "tip": "اختبر على أقدم جهاز ممكن — إذا عمل عليه، سيعمل على الأحدث."
+            },
+            {
+              "title": "اختبار الأداء والسرعة",
+              "desc": "راقب: وقت التحميل، استهلاك الذاكرة، حجم التطبيق. حسّن الصور والـ assets.",
+              "tools": ["📱 React Native Performance", "📊 Flipper"],
+              "outputs": ["تقرير أداء + تحسينات"],
+              "tip": "حجم التطبيق مهم — كل 10MB إضافية تفقدك 1% من التنزيلات."
+            },
+            {
+              "title": "اختبار المستخدمين (Beta)",
+              "desc": "وزّع نسخة تجريبية لـ 10-20 مستخدم. اجمع feedback عبر نموذج بسيط.",
+              "tools": ["📱 TestFlight (iOS)", "📱 Google Play Console — Internal Testing"],
+              "outputs": ["Feedback من مستخدمين حقيقيين"],
+              "tip": "أعطِ المختبرين مهاماً محددة: 'سجّل حساب واطلب منتج' — feedback أفضل من 'جرّب التطبيق'."
+            }
+          ]
+        },
+        {
+          "num": 6, "color": "#22c55e",
+          "title": "النشر والمتابعة",
+          "subtitle": "نشر التطبيق ومتابعة الأداء",
+          "tool": "📱 App Store + Play Store",
+          "steps": [
+            {
+              "title": "إعداد ملفات النشر",
+              "desc": "جهّز: أيقونة التطبيق، Screenshots، وصف التطبيق، الفئة، Privacy Policy.",
+              "tools": ["🎨 Figma — App Assets", "📱 EAS Build"],
+              "outputs": ["كل ملفات النشر جاهزة"],
+              "tip": "Screenshots هي أول ما يراه المستخدم — استثمر وقتاً في تصميمها بشكل احترافي."
+            },
+            {
+              "title": "النشر على المتاجر",
+              "desc": "ارفع على App Store Connect و Google Play Console. املأ كل الحقول المطلوبة بعناية.",
+              "tools": ["📱 App Store Connect", "📱 Google Play Console"],
+              "outputs": ["التطبيق منشور ومتاح للتحميل"],
+              "tip": "مراجعة Apple تأخذ 24-48 ساعة — Google عادةً أسرع. خطط لذلك."
+            },
+            {
+              "title": "المراقبة والتحديث المستمر",
+              "desc": "راقب: Crash reports، تقييمات المستخدمين، عدد التنزيلات. أصدر تحديثات منتظمة.",
+              "tools": ["📊 Sentry", "📱 App Store Connect Analytics"],
+              "outputs": ["Dashboard مراقبة + خطة تحديثات"],
+              "tip": "رد على تقييمات المستخدمين (حتى السلبية) — يحسّن ترتيبك في المتجر ويبني ثقة."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,26 +1,102 @@
 @import "tailwindcss";
 
+/* ─── Dark Theme (default) ─── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --theme-bg: #0d0f14;
+  --theme-surface: #13161e;
+  --theme-surface2: #1a1e2a;
+  --theme-border: #232738;
+  --theme-text: #e8eaf0;
+  --theme-muted: #6b7280;
+  --theme-dim: #9ca3af;
+  --theme-primary: #6366f1;
+}
+
+/* ─── Light Theme ─── */
+html.light {
+  --theme-bg: #f5f7fa;
+  --theme-surface: #ffffff;
+  --theme-surface2: #f0f2f5;
+  --theme-border: #e2e5ea;
+  --theme-text: #1a1d23;
+  --theme-muted: #6b7280;
+  --theme-dim: #4b5563;
+  --theme-primary: #6366f1;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-background: var(--theme-bg);
+  --color-surface: var(--theme-surface);
+  --color-surface2: var(--theme-surface2);
+  --color-border: var(--theme-border);
+  --color-text: var(--theme-text);
+  --color-muted: var(--theme-muted);
+  --color-dim: var(--theme-dim);
+  --color-primary: var(--theme-primary);
+
+  --font-sans: var(--font-geist-sans), "Cairo", "Segoe UI", "Tahoma", system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Animations */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-down {
+  animation: fadeDown 0.25s ease;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.25s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 100px;
+}
+
+/* Light theme scrollbar adjust */
+html.light ::-webkit-scrollbar-thumb {
+  background: #c4c8d0;
 }
